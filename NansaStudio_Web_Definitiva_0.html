@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nansa Studio — Estudio de diseño y desarrollo web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F7F4;
+    --bg-alt: #F1F1EC;
+    --ink: #15171B;
+    --ink-soft: #52565E;
+    --ink-faint: #8A8E96;
+    --accent: #3652FF;
+    --accent-ink: #1E2A8C;
+    --accent-soft: #E9ECFF;
+    --line: #E2E1DB;
+    --white: #FFFFFF;
+    --radius: 3px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  section{padding:120px 0;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(247,247,244,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:21px;
+    letter-spacing:-0.01em;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo-mark{
+    width:11px;height:11px;
+    background:var(--accent);
+    display:inline-block;
+    border-radius:2px;
+  }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .nav-links a{transition:color .15s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    font-size:14px;
+    font-weight:600;
+    padding:11px 20px;
+    background:var(--ink);
+    color:var(--white);
+    border-radius:var(--radius);
+    transition:background .15s;
+  }
+  .nav-cta:hover{background:var(--accent);}
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:0;
+    cursor:pointer;
+    color:var(--ink);
+    padding:6px;
+  }
+
+  .mobile-menu{
+    display:none;
+    flex-direction:column;
+    background:var(--bg);
+    border-top:1px solid var(--line);
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .mobile-menu.open{max-height:400px;}
+  .mobile-menu a{
+    padding:16px 32px;
+    font-size:15px;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu a:hover{color:var(--ink);}
+  .mobile-menu .mobile-cta{
+    color:var(--accent);
+    font-weight:600;
+    border-bottom:none;
+  }
+
+  @media(max-width:840px){
+    .nav-links{display:none;}
+    .nav-cta{display:none;}
+    .nav-toggle{display:block;}
+    .mobile-menu{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 60px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:52px;
+    line-height:1.06;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero p{
+    font-size:17.5px;
+    color:var(--ink-soft);
+    max-width:480px;
+    margin-bottom:38px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 24px;
+    border-radius:var(--radius);
+    font-size:14.5px;
+    font-weight:600;
+    transition:all .15s;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--white);
+  }
+  .btn-primary:hover{background:var(--accent);}
+  .btn-ghost{
+    border-color:var(--ink);
+    color:var(--ink);
+    background:transparent;
+  }
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* ---- Signature: mock browser that builds itself ---- */
+  .browser-mock{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 40px 80px -40px rgba(21,23,27,0.25);
+  }
+  .browser-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--line);
+  }
+  .browser-dot{width:9px;height:9px;border-radius:50%;background:#D8D7CF;}
+  .browser-url{
+    flex:1;
+    margin-left:8px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:5px 14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  .browser-body{
+    position:relative;
+    height:340px;
+    padding:22px;
+  }
+  .skeleton{
+    position:absolute;
+    inset:0;
+    padding:22px;
+    opacity:1;
+    animation: fadeOutSkeleton 0.6s ease-in 2.6s forwards;
+  }
+  .sk-line{
+    background:var(--bg-alt);
+    border:1px dashed var(--line);
+    border-radius:3px;
+  }
+  .sk-1{height:22px;width:60%;margin-bottom:14px;animation:drawIn .5s ease-out .1s both;}
+  .sk-2{height:12px;width:85%;margin-bottom:8px;animation:drawIn .5s ease-out .3s both;}
+  .sk-3{height:12px;width:70%;margin-bottom:20px;animation:drawIn .5s ease-out .45s both;}
+  .sk-row{display:flex;gap:12px;}
+  .sk-box{flex:1;height:90px;animation:drawIn .5s ease-out .65s both;}
+  .sk-box:nth-child(2){animation-delay:.8s;}
+  .sk-box:nth-child(3){animation-delay:.95s;}
+
+  @keyframes drawIn{
+    from{opacity:0;transform:scaleX(0.85);}
+    to{opacity:1;transform:scaleX(1);}
+  }
+  @keyframes fadeOutSkeleton{
+    to{opacity:0;visibility:hidden;}
+  }
+
+  .real-content{
+    position:absolute;
+    inset:0;
+    padding:22px;
+    opacity:0;
+    animation:fadeInReal 0.7s ease-out 2.9s forwards;
+  }
+  @keyframes fadeInReal{
+    from{opacity:0;transform:translateY(6px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .rc-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--accent);
+    letter-spacing:.08em;
+    margin-bottom:10px;
+  }
+  .rc-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:22px;
+    margin-bottom:10px;
+    line-height:1.15;
+  }
+  .rc-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    max-width:280px;
+    margin-bottom:20px;
+  }
+  .rc-imgrow{display:flex;gap:10px;}
+  .rc-imgbox{
+    flex:1;height:88px;border-radius:4px;
+  }
+  .rc-imgbox:nth-child(1){background:linear-gradient(135deg,var(--accent-soft),#fff);}
+  .rc-imgbox:nth-child(2){background:linear-gradient(135deg,var(--ink),#3a3d45);}
+  .rc-imgbox:nth-child(3){background:linear-gradient(135deg,var(--accent),#7c8cff);}
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:56px;
+  }
+  .sec-head h2{font-size:34px;max-width:520px;}
+  .sec-head p{color:var(--ink-soft);max-width:340px;font-size:15px;}
+
+  .alt-bg{background:var(--bg-alt);}
+
+  /* ---------- QUIÉNES SOMOS ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about-grid h2{font-size:32px;line-height:1.15;}
+  .about-text{
+    font-size:18px;
+    line-height:1.6;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- SERVICIOS ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--bg);
+    padding:36px 32px;
+    transition:background .2s;
+  }
+  .service-card:hover{background:var(--white);}
+  .service-icon{
+    width:38px;height:38px;
+    margin-bottom:22px;
+    color:var(--accent);
+  }
+  .service-card h3{font-size:18.5px;margin-bottom:10px;}
+  .service-card p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- PROCESO ---------- */
+  .process-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px 24px;
+  }
+  .process-step{
+    border-top:2px solid var(--ink);
+    padding-top:20px;
+  }
+  .process-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .process-step h4{font-size:16px;margin-bottom:8px;}
+  .process-step p{font-size:13.5px;color:var(--ink-soft);}
+
+  /* ---------- PRECIOS ---------- */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .price-card{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:36px 30px;
+    background:var(--white);
+    display:flex;
+    flex-direction:column;
+  }
+  .price-card.featured{
+    background:var(--ink);
+    color:var(--white);
+    border-color:var(--ink);
+    transform:translateY(-10px);
+  }
+  .price-card.featured .price-desc,
+  .price-card.featured .feature-list li{color:#C7CAD3;}
+  .price-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:16px;
+  }
+  .price-card.featured .price-tag{color:#8CA0FF;}
+  .price-card h3{font-size:21px;margin-bottom:8px;}
+  .price-amount{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .price-desc{font-size:13.5px;color:var(--ink-faint);margin-bottom:26px;}
+  .price-management{
+    font-size:11.5px;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .price-card.featured .price-management{color:#8CA0FF;}
+  .feature-list{list-style:none;margin-bottom:32px;flex:1;}
+  .feature-list li{
+    font-size:14px;
+    padding:9px 0;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:10px;
+  }
+  .price-card.featured .feature-list li{border-top-color:rgba(255,255,255,0.12);}
+  .feature-list li::before{content:"—";color:var(--accent);flex-shrink:0;}
+  .price-card.featured .feature-list li::before{color:#8CA0FF;}
+  .price-btn{
+    text-align:center;
+    padding:13px;
+    border-radius:var(--radius);
+    border:1px solid var(--ink);
+    font-weight:600;
+    font-size:14px;
+    transition:all .15s;
+  }
+  .price-btn:hover{background:var(--ink);color:var(--white);}
+  .price-card.featured .price-btn{border-color:var(--white);background:var(--white);color:var(--ink);}
+  .price-card.featured .price-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white);}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;}
+  details{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  summary{
+    cursor:pointer;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  .faq-icon{
+    width:18px;height:18px;
+    flex-shrink:0;
+    position:relative;
+  }
+  .faq-icon::before,.faq-icon::after{
+    content:"";
+    position:absolute;
+    background:var(--ink);
+    transition:transform .2s;
+  }
+  .faq-icon::before{width:100%;height:1.5px;top:50%;left:0;transform:translateY(-50%);}
+  .faq-icon::after{height:100%;width:1.5px;left:50%;top:0;transform:translateX(-50%);}
+  details[open] .faq-icon::after{transform:translateX(-50%) rotate(90deg);opacity:0;}
+  details p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    max-width:600px;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+  }
+  .contact-info h2{font-size:34px;margin-bottom:18px;}
+  .contact-info p{color:var(--ink-soft);margin-bottom:32px;max-width:400px;}
+  .contact-alt{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .contact-alt:last-child{border-bottom:1px solid var(--line);}
+  .contact-alt strong{font-weight:600;}
+  .contact-alt span{color:var(--ink-faint);font-size:13px;display:block;}
+
+  form{display:flex;flex-direction:column;gap:18px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:8px;
+    display:block;
+  }
+  input,select,textarea{
+    width:100%;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:13px 14px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    transition:border-color .15s;
+  }
+  input:focus,select:focus,textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  textarea{resize:vertical;min-height:110px;}
+  .form-submit{
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .form-note{font-size:12.5px;color:var(--ink-faint);margin-top:4px;}
+  .form-consent{display:flex;flex-direction:column;gap:12px;}
+  .form-rgpd-note{
+    font-size:11.5px;
+    line-height:1.55;
+    color:var(--ink-faint);
+  }
+  .form-rgpd-note a{color:var(--accent);text-decoration:underline;}
+  .checkbox-label{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:13.5px;
+    font-family:'Inter',sans-serif;
+    text-transform:none;
+    letter-spacing:normal;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .checkbox-label input[type="checkbox"]{
+    width:16px;height:16px;
+    margin-top:2px;
+    flex-shrink:0;
+    accent-color:var(--accent);
+    cursor:pointer;
+  }
+  .checkbox-label a{color:var(--accent);font-weight:600;text-decoration:underline;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:48px 0;
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-links{display:flex;gap:28px;font-size:13.5px;color:var(--ink-soft);}
+  .footer-links a:hover{color:var(--accent);}
+  .footer-copy{font-size:12.5px;color:var(--ink-faint);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .footer-legal{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);}
+  .footer-legal a:hover{color:var(--accent);}
+  @media(max-width:600px){
+    .footer-bottom{flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ---------- INFORMACIÓN LEGAL ---------- */
+  .legal-hero{padding:72px 0 32px;border-bottom:1px solid var(--line);}
+  .legal-hero h1{font-size:38px;line-height:1.15;margin-bottom:14px;}
+  .legal-hero .legal-lead{color:var(--ink-soft);font-size:15.5px;max-width:640px;margin-bottom:28px;}
+  .legal-updated{font-size:13.5px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;}
+
+  .doc-tabs{display:flex;gap:10px;flex-wrap:wrap;padding:22px 0;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:65px;z-index:90;}
+  .doc-tabs .wrap{display:flex;gap:10px;flex-wrap:wrap;}
+  .doc-tab{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;padding:9px 16px;border:1px solid var(--line);border-radius:20px;color:var(--ink-soft);background:var(--white);transition:all .15s;}
+  .doc-tab:hover{border-color:var(--accent);color:var(--accent);}
+
+  .legal-block{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:150px;}
+  .legal-block:last-of-type{border-bottom:none;}
+  .block-header{max-width:820px;margin:0 auto 8px;}
+  .block-title{font-size:28px;margin-bottom:6px;}
+
+  .legal-content{padding:24px 0 0;max-width:820px;margin:0 auto;}
+  .legal-content h3{font-size:19px;margin:34px 0 12px;}
+  .legal-content h4{font-size:16px;margin:20px 0 10px;}
+  .legal-content h3:first-child{margin-top:0;}
+  .legal-content p{color:var(--ink-soft);margin-bottom:14px;font-size:15.5px;}
+  .legal-content ul{color:var(--ink-soft);margin:0 0 14px 22px;font-size:15.5px;}
+  .legal-content li{margin-bottom:6px;}
+  .legal-content strong{color:var(--ink);}
+  .legal-content a{color:var(--accent);text-decoration:underline;}
+  .placeholder{background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:3px;font-size:0.95em;}
+
+  .info-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14.5px;}
+  .info-table th,.info-table td{text-align:left;padding:12px 14px;border:1px solid var(--line);vertical-align:top;}
+  .info-table th{background:var(--bg-alt);font-family:'Space Grotesk',sans-serif;font-weight:600;width:180px;}
+  .info-table td{color:var(--ink-soft);}
+
+  @media(max-width:600px){
+    .legal-hero h1{font-size:28px;}
+    .info-table th{width:130px;}
+    .doc-tabs{top:57px;}
+  }
+
+  /* ---------- FORM ERROR ---------- */
+  .form-error{
+    display:none;
+    font-size:13px;
+    color:#B3261E;
+    background:#FBEAE9;
+    border:1px solid #F0C6C3;
+    border-radius:var(--radius);
+    padding:10px 14px;
+    margin-top:4px;
+  }
+
+  /* ---------- COOKIE BANNER ---------- */
+  .cookie-banner{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:200;
+    background:var(--ink);
+    color:#fff;
+    padding:20px 32px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px 24px;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 -12px 32px -16px rgba(0,0,0,0.35);
+  }
+  .cookie-banner.hidden{display:none;}
+  .cookie-banner p{
+    font-size:13.5px;
+    line-height:1.5;
+    color:#C7CAD3;
+    max-width:640px;
+    margin:0;
+  }
+  .cookie-banner a{color:#fff;text-decoration:underline;}
+  .cookie-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+  .cookie-btn{
+    padding:11px 20px;
+    border-radius:var(--radius);
+    font-size:13.5px;
+    font-weight:600;
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:all .15s;
+  }
+  .cookie-btn.cookie-accept{background:var(--accent);color:#fff;}
+  .cookie-btn.cookie-accept:hover{background:#2540d1;}
+  .cookie-btn.cookie-reject{background:transparent;border-color:rgba(255,255,255,0.35);color:#fff;}
+  .cookie-btn.cookie-reject:hover{border-color:#fff;}
+  @media(max-width:600px){
+    .cookie-banner{flex-direction:column;align-items:flex-start;padding:18px 20px;}
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:40px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .process-list{grid-template-columns:repeat(2,1fr);}
+    .pricing-grid{grid-template-columns:1fr;}
+    .price-card.featured{transform:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;gap:24px;}
+  }
+  @media(max-width:600px){
+    section{padding:72px 0;}
+    .wrap{padding:0 20px;}
+    .hero h1{font-size:32px;}
+    .services-grid{grid-template-columns:1fr;}
+    .sec-head{flex-direction:column;align-items:flex-start;}
+    .form-row{grid-template-columns:1fr;}
+    .browser-body{height:auto;min-height:300px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="logo-mark"></span>Nansa Studio</div>
+    <div class="nav-links">
+      <a href="#quienes-somos">¿Quiénes somos?</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#precios">Precios</a>
+      <a href="#faq">FAQ</a>
+      <a href="#legal">Legal</a>
+    </div>
+    <a href="#contacto" class="nav-cta">Pide presupuesto</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path id="toggleIcon" d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#quienes-somos">¿Quiénes somos?</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#precios">Precios</a>
+    <a href="#faq">FAQ</a>
+    <a href="#legal">Legal</a>
+    <a href="#contacto" class="mobile-cta">Pide presupuesto</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Estudio de diseño &amp; desarrollo web</div>
+      <h1>Webs que hacen<br>su trabajo, no solo<br><em>quedan bien.</em></h1>
+      <p>Diseñamos páginas web que son más que una tarjeta de visita: muestran, dan a conocer, mejoran y modernizan empresas.</p>
+      <div class="hero-actions">
+        <a href="#servicios" class="btn btn-primary">Ver servicios</a>
+        <a href="#contacto" class="btn btn-ghost">Pide presupuesto</a>
+      </div>
+    </div>
+
+    <div class="browser-mock">
+      <div class="browser-bar">
+        <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+        <div class="browser-url">tunegocio.com</div>
+      </div>
+      <div class="browser-body">
+        <div class="skeleton">
+          <div class="sk-line sk-1"></div>
+          <div class="sk-line sk-2"></div>
+          <div class="sk-line sk-3"></div>
+          <div class="sk-row">
+            <div class="sk-line sk-box"></div>
+            <div class="sk-line sk-box"></div>
+            <div class="sk-line sk-box"></div>
+          </div>
+        </div>
+        <div class="real-content">
+          <div class="rc-tag">// TU NEGOCIO ONLINE</div>
+          <div class="rc-title">De boceto a<br>web publicada.</div>
+          <div class="rc-sub">Así de rápido pasa tu proyecto de la idea al navegador.</div>
+          <div class="rc-imgrow">
+            <div class="rc-imgbox"></div>
+            <div class="rc-imgbox"></div>
+            <div class="rc-imgbox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quienes-somos">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="eyebrow">¿Quiénes somos?</div>
+      <h2>Un equipo joven, especializado en hacer crecer negocios online.</h2>
+    </div>
+    <div class="reveal">
+      <p class="about-text">Somos una empresa especializada en el diseño, mantenimiento y SEO de páginas web. Estamos enfocados en que las pequeñas y medianas empresas puedan crecer aprovechándose de las ventajas de estar correctamente posicionadas en internet.</p>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Un servicio para cada etapa de tu negocio online.</h2>
+      <p>Nada de paquetes cerrados imposibles de entender. Elige lo que necesitas ahora mismo.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 8h18" stroke="currentColor" stroke-width="1.6"/><path d="M7 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Web corporativa</h3>
+        <p>La presencia digital de tu negocio: quién eres, qué ofreces y cómo contactarte, en una web rápida y clara.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7Z" stroke="currentColor" stroke-width="1.6"/><path d="M8 7V5.5a4 4 0 0 1 8 0V7" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Tienda online</h3>
+        <p>Catálogo, carrito y pasarela de pago configurados para que empieces a vender desde el primer día.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>SEO local</h3>
+        <p>Que te encuentren en Google cuando busquen tu servicio en tu ciudad. Optimización técnica y de contenido.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5-2 2m-9 9-2 2m0-13 2 2m9 9 2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Mantenimiento</h3>
+        <p>Actualizaciones, copias de seguridad y pequeños cambios de contenido, todo gestionado sin que te preocupes.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Rediseño</h3>
+        <p>¿Tu web actual se ve anticuada o carga lenta? La renovamos manteniendo lo que ya funciona bien.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Landing pages</h3>
+        <p>Páginas de aterrizaje enfocadas a un solo objetivo: captar leads, vender un producto o promocionar un evento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>De la primera llamada a tu web publicada.</h2>
+      <p>Un proceso ordenado, en seis fases, para que sepas en todo momento en qué punto estamos.</p>
+    </div>
+    <div class="process-list reveal">
+      <div class="process-step">
+        <div class="process-num mono">01</div>
+        <h4>Brief inicial</h4>
+        <p>Hablamos de tu negocio, objetivos y referencias. Sin compromiso.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num mono">02</div>
+        <h4>Propuesta</h4>
+        <p>Recibes presupuesto cerrado, plazos y estructura de la web.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num mono">03</div>
+        <h4>Diseño</h4>
+        <p>Boceto visual de las páginas clave para tu validación.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num mono">04</div>
+        <h4>Desarrollo</h4>
+        <p>Programamos la web completa, responsive y optimizada.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num mono">05</div>
+        <h4>Entrega</h4>
+        <p>Publicación, formación de uso y primer mes de soporte incluido.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num mono">06</div>
+        <h4>Gestión e informe trimestral</h4>
+        <p>Mantenimiento continuo de tu web y un informe cada trimestre con los datos clave de tu negocio online.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Precios claros, sin presupuestos misteriosos.</h2>
+      <p>Rangos orientativos según el alcance del proyecto. Presupuesto cerrado tras el brief inicial.</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-tag mono">Básica</div>
+        <h3>Web corporativa</h3>
+        <div class="price-amount">Desde 250€</div>
+        <div class="price-management mono">+ 30€/mes gestión y mantenimiento</div>
+        <div class="price-desc">Ideal para autónomos y pequeños negocios que necesitan presencia online ya.</div>
+        <ul class="feature-list">
+          <li>Hasta 5 páginas</li>
+          <li>Diseño responsive</li>
+          <li>Formulario de contacto</li>
+          <li>SEO básico incluido</li>
+          <li>1 ronda de revisiones</li>
+        </ul>
+        <a href="#contacto" class="price-btn">Elegir plan</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag mono">Profesional</div>
+        <h3>Web + tienda online</h3>
+        <div class="price-amount">Desde 450€</div>
+        <div class="price-management mono">+ 30€/mes gestión y mantenimiento</div>
+        <div class="price-desc">Para negocios que quieren vender online desde el primer día.</div>
+        <ul class="feature-list">
+          <li>Hasta 12 páginas</li>
+          <li>Tienda con pasarela de pago</li>
+          <li>Panel de gestión de pedidos</li>
+          <li>SEO avanzado</li>
+          <li>3 rondas de revisiones</li>
+          <li>1 mes de soporte incluido</li>
+        </ul>
+        <a href="#contacto" class="price-btn">Elegir plan</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tag mono">A medida</div>
+        <h3>Proyecto a medida</h3>
+        <div class="price-amount">Presupuesto</div>
+        <div class="price-management mono">+ 30€/mes gestión y mantenimiento</div>
+        <div class="price-desc">Funcionalidades específicas, integraciones o plataformas complejas.</div>
+        <ul class="feature-list">
+          <li>Alcance definido contigo</li>
+          <li>Integraciones a medida</li>
+          <li>Diseño 100% personalizado</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="#contacto" class="price-btn">Hablemos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Preguntas frecuentes.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details open>
+        <summary>¿El precio incluye el dominio y el hosting?<span class="faq-icon"></span></summary>
+        <p>No, el dominio y el hosting se contratan aparte y a tu nombre, para que tú tengas siempre la propiedad total de tu web. Te ayudo a elegir y configurar ambos sin coste adicional.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda un proyecto típico?<span class="faq-icon"></span></summary>
+        <p>Una web corporativa suele tardar entre 3 y 4 semanas desde el brief inicial. Un proyecto de tienda online, entre 5 y 7 semanas, según la complejidad del catálogo.</p>
+      </details>
+      <details>
+        <summary>¿Cuántas revisiones incluye cada plan?<span class="faq-icon"></span></summary>
+        <p>El plan Básico incluye 1 ronda de revisiones y el Profesional 3 rondas. Revisiones adicionales se presupuestan aparte, aunque en la práctica casi nunca hacen falta más.</p>
+      </details>
+      <details>
+        <summary>¿Podré editar yo mismo el contenido después?<span class="faq-icon"></span></summary>
+        <p>Sí. Todas las webs se entregan con un panel de gestión sencillo para que puedas cambiar textos e imágenes sin conocimientos técnicos. Incluyo una sesión de formación en la entrega.</p>
+      </details>
+      <details>
+        <summary>¿Qué formas de pago aceptamos?<span class="faq-icon"></span></summary>
+        <p>Transferencia bancaria en dos plazos: 50% al confirmar el proyecto y 50% en la entrega final. Para proyectos a medida, se puede acordar un calendario de pagos por fases.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="alt-bg">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Hablemos</div>
+      <h2>¿Listo para tener la web que tu negocio necesita?</h2>
+      <p>Cuéntame en qué punto está tu proyecto y te responderé con una propuesta concreta en menos de 24 horas.</p>
+      <div class="contact-alt">
+        <strong>Email</strong>
+        <span>nansastudioo@gmail.com</span>
+      </div>
+      <div class="contact-alt">
+        <strong>WhatsApp</strong>
+        <span>+34 635 585 155</span>
+      </div>
+    </div>
+    <form class="reveal" id="contactForm" onsubmit="handleSubmit(event)">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="Nueva solicitud de presupuesto — Nansa Studio">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <div class="form-row">
+        <div>
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" required placeholder="Tu nombre">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com">
+        </div>
+      </div>
+      <div>
+        <label for="project">Tipo de proyecto</label>
+        <select id="project" name="Tipo de proyecto">
+          <option>Web corporativa</option>
+          <option>Tienda online</option>
+          <option>Rediseño de web actual</option>
+          <option>Otro / no lo tengo claro</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Cuéntame tu proyecto</label>
+        <textarea id="message" name="message" required placeholder="¿Qué necesitas y para qué fecha?"></textarea>
+      </div>
+      <div class="form-consent">
+        <p class="form-rgpd-note">
+          <strong>Responsable:</strong> Nansa Studio. <strong>Finalidad:</strong> atender tu consulta o solicitud de presupuesto. <strong>Legitimación:</strong> tu consentimiento. <strong>Destinatarios:</strong> no se ceden datos a terceros, salvo obligación legal. <strong>Derechos:</strong> acceder, rectificar, suprimir los datos y demás derechos que te asisten, tal como se explica en la información adicional de nuestra <a href="#privacidad">Política de Privacidad</a>.
+        </p>
+        <label class="checkbox-label" for="privacyConsent">
+          <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+          <span>He leído y acepto la <a href="#privacidad">Política de Privacidad</a>.</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+        <span id="submitLabel">Enviar mensaje</span>
+        <svg id="submitCheck" width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:none">
+          <path d="M4 12.5l5 5L20 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="form-note">Responderemos en 24 horas laborables. Gracias por confiar en nosotros.</div>
+      <div class="form-error" id="formError">No se ha podido enviar el mensaje. Inténtalo de nuevo o escríbenos directamente a <a href="mailto:nansastudioo@gmail.com">nansastudioo@gmail.com</a>.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ INFORMACIÓN LEGAL ============ -->
+<section class="legal-hero" id="legal">
+  <div class="wrap">
+    <div class="eyebrow">Información legal</div>
+    <h1>Información Legal</h1>
+    <p class="legal-lead">Aquí encontrarás el Aviso Legal, la Política de Privacidad y la Política de Cookies de nansastudio.es, reunidos en un único documento para facilitar su consulta.</p>
+    <div class="legal-updated">Última actualización: 25 de agosto de 2026</div>
+  </div>
+</section>
+
+<div class="doc-tabs">
+  <div class="wrap">
+    <a href="#aviso-legal" class="doc-tab">Aviso Legal</a>
+    <a href="#privacidad" class="doc-tab">Política de Privacidad</a>
+    <a href="#cookies" class="doc-tab">Política de Cookies</a>
+  </div>
+</div>
+
+<!-- ============ AVISO LEGAL ============ -->
+<section id="aviso-legal" class="legal-block">
+  <div class="wrap">
+    <div class="block-header">
+      <h2 class="block-title">Aviso Legal</h2>
+    </div>
+    <div class="legal-content">
+      <h3>1. Datos identificativos del titular</h3>
+      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa a los usuarios de los siguientes datos del titular de este sitio web:</p>
+      <ul>
+        <li><strong>Titular / Razón social:</strong> David Fernández Arroyo</li>
+        <li><strong>NIF/CIF:</strong> 58437814N</li>
+        <li><strong>Domicilio:</strong> C. Carmen Martín Gaite, 2, Gijón-Sur, 33211 Gijón (Asturias)</li>
+        <li><strong>Correo electrónico:</strong> nansastudioo@gmail.com</li>
+        <li><strong>Teléfono:</strong> +34 635 585 155</li>
+        <li><strong>Actividad:</strong> diseño y desarrollo de páginas web</li>
+      </ul>
+
+      <h3>2. Objeto</h3>
+      <p>El presente Aviso Legal regula el uso del sitio web nansastudio.es (en adelante, "el sitio web"), del que es titular Nansa Studio. La navegación por el sitio web atribuye la condición de usuario del mismo e implica la aceptación plena de todas las condiciones incluidas en este Aviso Legal.</p>
+
+      <h3>3. Condiciones de uso</h3>
+      <p>El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que Nansa Studio ofrece a través de su sitio web y a no emplearlos para incurrir en actividades ilícitas o contrarias a la buena fe y al ordenamiento legal; difundir contenidos o propaganda de carácter racista, xenófobo, pornográfico, de apología del terrorismo o atentatorio contra los derechos humanos; provocar daños en los sistemas físicos y lógicos de Nansa Studio, de sus proveedores o de terceras personas; o intentar acceder y, en su caso, utilizar las cuentas de correo electrónico de otros usuarios.</p>
+
+      <h3>4. Propiedad intelectual e industrial</h3>
+      <p>Todos los contenidos del sitio web, incluyendo a título enunciativo textos, fotografías, gráficos, imágenes, iconos, tecnología, software, diseño gráfico y códigos fuente, constituyen una obra cuya propiedad pertenece a Nansa Studio, sin que puedan entenderse cedidos al usuario ninguno de los derechos de explotación reconocidos por la normativa vigente en materia de propiedad intelectual sobre los mismos.</p>
+      <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública y transformación total o parcial de los contenidos del sitio web sin la autorización expresa de Nansa Studio.</p>
+
+      <h3>5. Exclusión de responsabilidad</h3>
+      <p>Nansa Studio no se hace responsable de los daños y perjuicios que pudieran derivarse de interferencias, interrupciones, virus informáticos, averías telefónicas o desconexiones en el funcionamiento operativo del sitio web, motivadas por causas ajenas a Nansa Studio, ni de los daños causados por un uso inadecuado del sitio web.</p>
+
+      <h3>6. Enlaces a terceros</h3>
+      <p>El sitio web puede contener enlaces a otros sitios web gestionados por terceros. Nansa Studio no asume responsabilidad alguna sobre el contenido, funcionamiento o políticas de privacidad de dichos sitios.</p>
+
+      <h3>7. Legislación aplicable y jurisdicción</h3>
+      <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia derivada del acceso o uso del sitio web, las partes se someten a los Juzgados y Tribunales que correspondan conforme a derecho.</p>
+
+      <h3>8. Más información</h3>
+      <p>Puedes consultar también nuestra <a href="#privacidad">Política de Privacidad</a> y nuestra <a href="#cookies">Política de Cookies</a>. Para cualquier duda, escríbenos a nansastudioo@gmail.com.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POLÍTICA DE PRIVACIDAD ============ -->
+<section id="privacidad" class="legal-block">
+  <div class="wrap">
+    <div class="block-header">
+      <h2 class="block-title">Política de Privacidad</h2>
+    </div>
+    <div class="legal-content">
+      <p>En Nansa Studio nos tomamos muy en serio la protección de tus datos personales. Esta Política de Privacidad explica cómo recogemos, tratamos y protegemos la información que nos facilitas al utilizar este sitio web, en cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+      <h3>1. Responsable del tratamiento</h3>
+      <table class="info-table">
+        <tr><th>Titular</th><td>David Fernández Arroyo</td></tr>
+        <tr><th>NIF/CIF</th><td>58437814N</td></tr>
+        <tr><th>Domicilio</th><td>C. Carmen Martín Gaite, 2, Gijón-Sur, 33211 Gijón (Asturias)</td></tr>
+        <tr><th>Correo electrónico</th><td>nansastudioo@gmail.com</td></tr>
+        <tr><th>Teléfono</th><td>+34 635 585 155</td></tr>
+      </table>
+
+      <h3>2. Datos que recogemos</h3>
+      <p>A través del formulario de contacto de este sitio web recogemos los siguientes datos que tú mismo nos facilitas voluntariamente:</p>
+      <ul>
+        <li>Nombre</li>
+        <li>Correo electrónico</li>
+        <li>Tipo de proyecto de interés</li>
+        <li>Mensaje o descripción del proyecto</li>
+      </ul>
+
+      <h3>3. Finalidad del tratamiento</h3>
+      <p>Tus datos se tratan con las siguientes finalidades:</p>
+      <ul>
+        <li>Atender y responder a tu consulta o solicitud de presupuesto.</li>
+        <li>Gestionar la relación comercial que, en su caso, se derive de tu solicitud.</li>
+        <li>Enviarte comunicaciones relacionadas con tu consulta, siempre que lo hayas solicitado.</li>
+      </ul>
+      <p>No se toman decisiones automatizadas ni se elaboran perfiles a partir de tus datos.</p>
+
+      <h3>4. Legitimación</h3>
+      <p>La base legal para el tratamiento de tus datos es tu <strong>consentimiento</strong>, otorgado expresamente al marcar la casilla de aceptación y enviar el formulario de contacto, así como, en su caso, la ejecución de las medidas precontractuales o contractuales que puedan derivarse de tu solicitud.</p>
+
+      <h3>5. Conservación de los datos</h3>
+      <p>Tus datos se conservarán mientras se mantenga la relación con Nansa Studio y, una vez finalizada, durante los plazos legalmente exigibles para atender posibles responsabilidades. Los datos de consultas que no deriven en una relación comercial se conservarán durante un máximo de 12 meses desde su recepción.</p>
+
+      <h3>6. Destinatarios y cesiones de datos</h3>
+      <p>Tus datos no se cederán a terceros, salvo obligación legal. Podrán tener acceso a tus datos aquellos proveedores de servicios (por ejemplo, el servicio de alojamiento web o FormSubmit, herramienta utilizada para gestionar el envío a nuestro correo de los mensajes del formulario de contacto) que actúen como encargados del tratamiento, con los que Nansa Studio mantiene los correspondientes contratos de encargo de tratamiento conforme al artículo 28 del RGPD.</p>
+
+      <h3>7. Tus derechos</h3>
+      <p>Puedes ejercer en cualquier momento los siguientes derechos sobre tus datos personales:</p>
+      <ul>
+        <li><strong>Acceso:</strong> conocer qué datos tratamos sobre ti.</li>
+        <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+        <li><strong>Supresión:</strong> solicitar la eliminación de tus datos.</li>
+        <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos.</li>
+        <li><strong>Limitación:</strong> solicitar la limitación de su tratamiento en determinados supuestos.</li>
+        <li><strong>Portabilidad:</strong> recibir tus datos en un formato estructurado y de uso común.</li>
+      </ul>
+      <p>Para ejercer estos derechos, puedes escribirnos a nansastudioo@gmail.com, adjuntando una copia de un documento que acredite tu identidad. Asimismo, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) si consideras que el tratamiento de tus datos no se ajusta a la normativa vigente (www.aepd.es).</p>
+
+      <h3>8. Medidas de seguridad</h3>
+      <p>Nansa Studio ha adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.</p>
+
+      <h3>9. Cambios en esta política</h3>
+      <p>Esta Política de Privacidad puede actualizarse para adaptarse a novedades legislativas o cambios en nuestros servicios. Te recomendamos revisarla periódicamente.</p>
+
+      <h3>10. Más información</h3>
+      <p>Consulta también nuestro <a href="#aviso-legal">Aviso Legal</a> y nuestra <a href="#cookies">Política de Cookies</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POLÍTICA DE COOKIES ============ -->
+<section id="cookies" class="legal-block">
+  <div class="wrap">
+    <div class="block-header">
+      <h2 class="block-title">Política de Cookies</h2>
+    </div>
+    <div class="legal-content">
+      <h3>1. ¿Qué son las cookies?</h3>
+      <p>Las cookies son pequeños archivos de texto que un sitio web instala en el navegador o dispositivo del usuario durante su visita, con el fin de almacenar y recuperar información sobre la navegación que se realiza desde dicho dispositivo. Esta Política de Cookies te informa de qué tipo de cookies utiliza nansastudio.es, con qué finalidad y cómo puedes gestionarlas.</p>
+
+      <h3>2. Cookies que utilizamos</h3>
+      <p>Este sitio web utiliza los siguientes tipos de cookies:</p>
+      <table class="info-table">
+        <tr>
+          <th>Cookie</th>
+          <th>Tipo</th>
+          <th>Finalidad</th>
+          <th>Duración</th>
+        </tr>
+        <tr>
+          <td>Cookies técnicas propias</td>
+          <td>Técnica / necesaria</td>
+          <td>Permiten el funcionamiento básico del sitio web (por ejemplo, recordar el estado del menú de navegación)</td>
+          <td>Sesión</td>
+        </tr>
+        <tr>
+          <td>Google Fonts</td>
+          <td>Técnica de terceros</td>
+          <td>Carga de las tipografías del sitio web desde los servidores de Google</td>
+          <td>Según proveedor</td>
+        </tr>
+      </table>
+      <p>Actualmente este sitio web <strong>no utiliza cookies analíticas ni publicitarias</strong>. Si en el futuro se incorporan herramientas de analítica (por ejemplo, Google Analytics) o de publicidad, esta Política de Cookies se actualizará y, cuando sea necesario, se solicitará el consentimiento del usuario antes de instalarlas.</p>
+
+      <h3>3. Tipos de cookies según su finalidad</h3>
+      <ul>
+        <li><strong>Cookies técnicas:</strong> imprescindibles para el correcto funcionamiento del sitio web. No requieren consentimiento del usuario.</li>
+        <li><strong>Cookies de personalización:</strong> permiten recordar preferencias del usuario, como el idioma.</li>
+        <li><strong>Cookies analíticas:</strong> permiten medir y analizar la navegación de los usuarios. No se utilizan actualmente en este sitio web.</li>
+        <li><strong>Cookies publicitarias:</strong> permiten gestionar espacios publicitarios. No se utilizan actualmente en este sitio web.</li>
+      </ul>
+
+      <h3>4. ¿Cómo desactivar o eliminar las cookies?</h3>
+      <p>Puedes permitir, bloquear o eliminar las cookies instaladas en tu equipo mediante la configuración de las opciones del navegador que utilices. A continuación, te indicamos cómo acceder a la configuración de cookies en los navegadores más habituales:</p>
+      <ul>
+        <li><strong>Google Chrome:</strong> Configuración &gt; Privacidad y seguridad &gt; Cookies y otros datos de sitios.</li>
+        <li><strong>Mozilla Firefox:</strong> Opciones &gt; Privacidad y seguridad &gt; Cookies y datos del sitio.</li>
+        <li><strong>Safari:</strong> Preferencias &gt; Privacidad &gt; Gestionar datos de sitios web.</li>
+        <li><strong>Microsoft Edge:</strong> Configuración &gt; Cookies y permisos del sitio.</li>
+      </ul>
+      <p>Ten en cuenta que la desactivación de determinadas cookies técnicas puede afectar al correcto funcionamiento de algunas secciones del sitio web.</p>
+
+      <h3>5. Cambios en la Política de Cookies</h3>
+      <p>Nansa Studio puede modificar esta Política de Cookies en función de exigencias legislativas o para adaptarla a nuevas cookies que se incorporen al sitio web. Te recomendamos revisarla periódicamente.</p>
+
+      <h3>6. Más información</h3>
+      <p>Consulta también nuestro <a href="#aviso-legal">Aviso Legal</a> y nuestra <a href="#privacidad">Política de Privacidad</a>.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="logo"><span class="logo-mark"></span>Nansa Studio</div>
+      <div class="footer-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="#aviso-legal">Aviso Legal</a>
+        <a href="#privacidad">Política de Privacidad</a>
+        <a href="#cookies">Política de Cookies</a>
+      </div>
+      <div class="footer-copy">© 2026 Nansa Studio. Todos los derechos reservados.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" role="region" aria-label="Aviso de cookies">
+  <p>Utilizamos únicamente cookies técnicas necesarias para el funcionamiento de la web. Puedes aceptarlas o rechazarlas. Más información en nuestra <a href="#cookies">Política de Cookies</a>.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-btn cookie-reject" id="cookieReject">Rechazar</button>
+    <button type="button" class="cookie-btn cookie-accept" id="cookieAccept">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  // Menú móvil
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const toggleIcon = document.getElementById('toggleIcon');
+
+  navToggle.addEventListener('click', ()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    toggleIcon.setAttribute('d', isOpen
+      ? 'M6 6l12 12M18 6L6 18'   // icono "X"
+      : 'M4 6h16M4 12h16M4 18h16' // icono hamburguesa
+    );
+  });
+
+  // Cierra el menú móvil al pulsar un enlace
+  mobileMenu.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded','false');
+      toggleIcon.setAttribute('d','M4 6h16M4 12h16M4 18h16');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Contact form — envío real a nansastudioo@gmail.com vía FormSubmit
+  const CONTACT_EMAIL = 'nansastudioo@gmail.com';
+
+  function handleSubmit(e){
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+    const label = document.getElementById('submitLabel');
+    const check = document.getElementById('submitCheck');
+    const errorBox = document.getElementById('formError');
+
+    if(btn.disabled) return;
+
+    errorBox.style.display = 'none';
+
+    // Estado 1: enviando
+    btn.disabled = true;
+    btn.style.opacity = '0.75';
+    btn.style.cursor = 'default';
+    label.textContent = 'Enviando...';
+
+    const formData = new FormData(form);
+
+    fetch('https://formsubmit.co/ajax/' + CONTACT_EMAIL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    })
+      .then(res => {
+        if(!res.ok) throw new Error('Respuesta no válida del servidor');
+        return res.json();
+      })
+      .then(() => {
+        // Estado 2: confirmación
+        label.textContent = 'Mensaje enviado';
+        check.style.display = 'inline-block';
+        btn.style.background = '#2ba463';
+        btn.style.opacity = '1';
+        form.reset();
+
+        setTimeout(()=>{
+          // Estado 3: vuelve al estado inicial
+          label.textContent = 'Enviar mensaje';
+          check.style.display = 'none';
+          btn.style.background = '';
+          btn.style.cursor = '';
+          btn.disabled = false;
+        }, 3200);
+      })
+      .catch(() => {
+        // Estado de error: no se oculta ni se finge un envío correcto
+        label.textContent = 'Enviar mensaje';
+        btn.style.background = '';
+        btn.style.opacity = '';
+        btn.style.cursor = '';
+        btn.disabled = false;
+        errorBox.style.display = 'block';
+      });
+  }
+
+  // Banner de cookies
+  (function(){
+    const banner = document.getElementById('cookieBanner');
+    if(!banner) return;
+    const KEY = 'nansaCookieConsent';
+    if(localStorage.getItem(KEY)){
+      banner.classList.add('hidden');
+      return;
+    }
+    const acceptBtn = document.getElementById('cookieAccept');
+    const rejectBtn = document.getElementById('cookieReject');
+    acceptBtn.addEventListener('click', ()=>{
+      localStorage.setItem(KEY, 'accepted');
+      banner.classList.add('hidden');
+    });
+    rejectBtn.addEventListener('click', ()=>{
+      localStorage.setItem(KEY, 'rejected');
+      banner.classList.add('hidden');
+    });
+  })();
+</script>
+
+</body>
+</html>
